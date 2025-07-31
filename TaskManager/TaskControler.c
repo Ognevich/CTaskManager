@@ -73,12 +73,21 @@ void showCompleteTasks()
 
 void printTaskInfo(int index)
 {
+	char* charStatus;
+	
+	if (task_arr[index].taskStatus == -1) {
+		charStatus = "Un Done";
+	}
+	else {
+		charStatus = "Done";
+	}
+
 	printf("---------------------------------------\n");
 	printf("Task id: %d\n", index+1);
 	printf("Task Name: %s\n", task_arr[index].taskName);
 	printf("Task Description: %s\n", task_arr[index].taskDescription);
 	printf("Task Date: %s\n", task_arr[index].taskDate);
-	printf("Task Status: %d\n", task_arr[index].taskStatus);
+	printf("Task Status: %s\n", charStatus);
 	printf("---------------------------------------\n\n");
 }
 
@@ -93,6 +102,11 @@ int isIdSuitable(int taskId)
 void getTasksFromFile()
 {
 	FILE* file = fopen(TASK_PATH, "r");
+
+	if (!file) {
+		perror("Cannot open file");
+		exit(EXIT_FAILURE);
+	}
 
 	char task_name[TASK_NAME_LENGHT];
 	char task_description[TASK_DESCRIPTION_LENGHT];
@@ -153,7 +167,7 @@ void deleteTaskFromArray(int task_id)
 
 }
 
-void editTask(int taskId, char* taskName, char* taskDescription)
+void editFullTask(int taskId, char* taskName, char* taskDescription)
 {
 	int newTaskId = taskId - 1;
 
@@ -169,6 +183,35 @@ void editTask(int taskId, char* taskName, char* taskDescription)
 
 }
 
+void editTaskName(int taskId, char* taskName)
+{
+	int newTaskId = taskId - 1;
+
+	int idCheck = isIdSuitable(newTaskId);
+
+	if (idCheck == 1) {
+		printf("Tasks with this id don't exitst\n");
+		return;
+	}
+
+	strcpy(task_arr[newTaskId].taskName, taskName);
+}
+
+void editTaskDescription(int taskId, char* taskDescription) {
+
+	int newTaskId = taskId - 1;
+
+	int idCheck = isIdSuitable(newTaskId);
+
+	if (idCheck == 1) {
+		printf("Tasks with this id don't exitst\n");
+		return;
+	}
+
+	strcpy(task_arr[newTaskId].taskDescription, taskDescription);
+}
+
+
 void editMark(int taskId)
 {
 	int newTaskId = taskId - 1;
@@ -183,7 +226,7 @@ void editMark(int taskId)
 	task_arr[newTaskId].taskStatus = -(task_arr[newTaskId].taskStatus);
 }
 
-void enterNewTaskHandler()
+void enterNewTaskHendler()
 {
 	
 	char taskNameBuffer[TASK_NAME_LENGHT];
@@ -218,7 +261,7 @@ void enterDeleteTaskHandler()
 
 }
 
-void enterEditTasksHandler()
+void enterEditFullTasksHandler()
 {
 	int taskID = 0;
 	char taskNameBuffer[TASK_NAME_LENGHT];
@@ -236,9 +279,44 @@ void enterEditTasksHandler()
 	fgets(descriptionTaskBuffer, sizeof(descriptionTaskBuffer), stdin);
 	descriptionTaskBuffer[strcspn(descriptionTaskBuffer, "\n")] = '\0';
 
-	editTask(taskID, taskNameBuffer, descriptionTaskBuffer);
+	editFullTask(taskID, taskNameBuffer, descriptionTaskBuffer);
 	overwriteTasksToFile();
 
+}
+
+void enterEditNameTaskHandler()
+{
+	int taskID = 0;
+	char taskNameBuffer[TASK_NAME_LENGHT];
+
+	printf("Enter task id to edit: ");
+	scanf("%d", &taskID);
+	scanf("%*c");
+
+	printf("Enter Task Name: \n");
+	fgets(taskNameBuffer, sizeof(taskNameBuffer), stdin);
+	taskNameBuffer[strcspn(taskNameBuffer, "\n")] = '\0';
+
+	editTaskName(taskID, taskNameBuffer);
+	overwriteTasksToFile();
+
+}
+
+void enterEditDescriptionTaskHandler()
+{
+	int taskID = 0;
+	char descriptionTaskBuffer[TASK_DESCRIPTION_LENGHT];
+
+	printf("Enter task id to edit: ");
+	scanf("%d", &taskID);
+	scanf("%*c");
+
+	printf("Enter Task Description: \n");
+	fgets(descriptionTaskBuffer, sizeof(descriptionTaskBuffer), stdin);
+	descriptionTaskBuffer[strcspn(descriptionTaskBuffer, "\n")] = '\0';
+
+	editTaskDescription(taskID, descriptionTaskBuffer);
+	overwriteTasksToFile();
 }
 
 void enterMarkTasksHandler()

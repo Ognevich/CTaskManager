@@ -26,26 +26,33 @@ extern size_t taskSize;
 
 void initTaskArr();
 
-
+// FILE FUNCTIONS
 void addTaskToFile(char *taskName, char *taskDescription, char * buffer, int task_status);
 void getTasksFromFile();
 void overwriteTasksToFile();
 
+//FUNTIONS THAT OUTPUT MESSAGE
 void showAllTasks();
 void showToDoTasks();
 void showCompleteTasks();
 void printTaskInfo(int index);
+
 int isIdSuitable(int taskId);
 
+// HANDLERS
 void addTaskToArr(char * taskName, char * taskDescription, char* taskDate, int taskStatus);
 void deleteTaskFromArray(int task_id);
-void editTask(int taskId, char* taskName, char* taskDescription);
+void editFullTask(int taskId, char* taskName, char* taskDescription);
+void editTaskName(int taskId, char* taskName);
+void editTaskDescription(int taskID, char *descriptionTaskBuffer);
 void editMark(int taskId);
 
 // ENTER SOME INFO
-void enterNewTaskHandler();
+void enterNewTaskHendler();
 void enterDeleteTaskHandler();
-void enterEditTasksHandler();
+void enterEditFullTasksHandler();
+void enterEditNameTaskHandler();
+void enterEditDescriptionTaskHandler();
 void enterMarkTasksHandler();
 
 #endif

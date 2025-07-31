@@ -11,8 +11,8 @@ void Run() {
 
 	while (exit_app != -1) {
 		
-		option = showMenu();
-		TaskHandler(option, &exit_app);
+		option = showMainMenu();
+		taskHandler(option, &exit_app);
 
 	}
 
@@ -21,7 +21,7 @@ void Run() {
 
 }
 
-void TaskHandler(int option, int * exit_app)
+void taskHandler(int option, int * exit_app)
 {
 
 	switch (option)
@@ -39,14 +39,14 @@ void TaskHandler(int option, int * exit_app)
 		clearInputBuffer();
 		break;
 	case 3:
-		enterNewTaskHandler();
+		enterNewTaskHendler();
 		break;
 	case 4:
 		enterDeleteTaskHandler();
 		clearInputBuffer();
 		break;
 	case 5:
-		enterEditTasksHandler();
+		editTaskMenu();
 		break;
 	case 6:
 		enterMarkTasksHandler();
@@ -57,4 +57,32 @@ void TaskHandler(int option, int * exit_app)
 	default:
 		break;
 	}
+}
+
+void editTaskHandler(int option)
+{
+	switch (option)
+	{
+	case 0:
+		enterEditFullTasksHandler();
+	case 1:
+		enterEditNameTaskHandler();
+		break;
+	case 2:
+		enterEditDescriptionTaskHandler();
+		break;
+	case 3:
+		break;
+	default:
+		break;
+	}
+
+}
+
+void editTaskMenu()
+{
+	int option = 0;
+	option = showEditTaskMenu();
+	editTaskHandler(option);
+
 }

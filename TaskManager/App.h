@@ -8,7 +8,10 @@
 #include <windows.h>
 
 void Run();
-void TaskHandler(int option, int* exit);
 
+void taskHandler(int option, int* exit_app);
+void editTaskHandler(int option);
+
+void editTaskMenu();
 
 #endif

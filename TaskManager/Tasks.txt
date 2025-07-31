@@ -1,2 +1,2 @@
-Bohdan;asd;30.07.2025 21:37;-1
-Fix incorrect id like "abc";incorrect id;30.07.2025 21:38;-1
+Oleg;lox;30.07.2025 21:37;1
+Fix incorrect id like "abc";incorrect id;30.07.2025 21:38;1

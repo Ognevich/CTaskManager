@@ -1,2 +1,7 @@
 ﻿  App.c
+  Main.c
+  Menu.c
+  TaskControler.c
+D:\my_projects\C\TaskManager\TaskManager\TaskControler.c(50,17): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   TaskManager.vcxproj -> D:\my_projects\C\TaskManager\x64\Debug\TaskManager.exe

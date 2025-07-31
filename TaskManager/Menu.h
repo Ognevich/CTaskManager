@@ -4,8 +4,12 @@
 #include "TaskControler.h"
 #include <conio.h>
 
-#define MENU_SIZE 8
+#define MAIN_MENU_SIZE 8
+#define EDIT_MENU_SIZE 4
 
-int showMenu();
+int showMainMenu();
+int showEditTaskMenu();
+
+int definePressKey(int * menu_choice, int menu_size);
 
 #endif 
